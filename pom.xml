@@ -1,39 +1,40 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-<modelVersion>4.0.0</modelVersion>
-<groupId>pw.amel.amelioratelag</groupId>
-<artifactId>AmeliorateLag</artifactId>
-<packaging>jar</packaging>
-<version>1.0.0</version>
-<name>AmeliorateLag</name>
-<url>http://maven.apache.org</url>
-<properties>
-	<kotlin.version>1.3.31</kotlin.version>
-</properties>
-<dependencies>
-	<dependency>
-		<groupId>org.jetbrains.kotlin</groupId>
-		<artifactId>kotlin-stdlib</artifactId>
-		<version>${kotlin.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>org.jetbrains.kotlin</groupId>
-		<artifactId>kotlin-test-junit</artifactId>
-		<version>${kotlin.version}</version>
-		<scope>test</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.spigotmc</groupId>
-		<artifactId>spigot-api</artifactId>
-		<version>1.16.1-R0.1-SNAPSHOT</version>
-		<scope>provided</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.jetbrains.kotlin</groupId>
-		<artifactId>kotlin-reflect</artifactId>
-		<version>RELEASE</version>
-		<scope>compile</scope>
-	</dependency>
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>pw.amel.amelioratelag</groupId>
+	<artifactId>AmeliorateLag</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0.0</version>
+	<name>AmeliorateLag</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<kotlin.version>1.3.31</kotlin.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.jetbrains.kotlin</groupId>
+			<artifactId>kotlin-stdlib</artifactId>
+			<version>${kotlin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jetbrains.kotlin</groupId>
+			<artifactId>kotlin-test-junit</artifactId>
+			<version>${kotlin.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-api</artifactId>
+			<version>1.16.1-R0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jetbrains.kotlin</groupId>
+			<artifactId>kotlin-reflect</artifactId>
+			<version>RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
 	<repositories>
 		<repository>
 			<id>spigot-repo</id>
