@@ -13,8 +13,10 @@ class AmeliorateLag: JavaPlugin() {
 	override fun onEnable() {
 		instanceStorage = this
 		initCollectionMap()
+		initDomesticatedMobPackingCollection()
+
 		server.pluginManager.registerEvents(MarkBredAnimalsAsDomesticated, this)
 
-		GarbageCollector.runTaskTimer(this, GARBAGE_COLLECTION_INTERVAL, GARBAGE_COLLECTION_INTERVAL)
+		GarbageCollector.runTaskTimer(this, GARBAGE_COLLECTION_INTERVAL_TICKS, GARBAGE_COLLECTION_INTERVAL_TICKS)
 	}
 }

@@ -3,7 +3,6 @@ package pw.amel.amelioratelag
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
-import org.bukkit.entity.Tameable
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 import pw.amel.amelioratelag.GarbageCollector.ProcessingResult.*
@@ -42,13 +41,16 @@ object GarbageCollector: BukkitRunnable() {
             return NEVER_DESPAWN
         }
 
-        if (entity is Tameable && entity.isTamed) {
-            return NEVER_DESPAWN
-            // TODO: make entities that are packed together despawn after a long time (chunkloaded, thus taking server perf)
-        }
+        var doMobPackingDespawn = false
 
         if (entity.isDomesticated()) {
-            return NEVER_DESPAWN
+            if (entity.getNearbyEntities(DOMESTICATED_MOB_PACKING_SCAN_RADIUS,
+                            DOMESTICATED_MOB_PACKING_SCAN_RADIUS,
+                            DOMESTICATED_MOB_PACKING_SCAN_RADIUS).size > DOMESTICATED_MOB_PACKING_THRESHOLD) {
+                doMobPackingDespawn = true
+            } else {
+                return NEVER_DESPAWN
+            }
         }
 
         for (maybePlayer in entity.getNearbyEntities(PLAYER_SCAN_DISTANCE, PLAYER_SCAN_DISTANCE, PLAYER_SCAN_DISTANCE)) {
@@ -69,7 +71,12 @@ object GarbageCollector: BukkitRunnable() {
             data[GCKey, PersistentDataType.BYTE] = (data[GCKey, PersistentDataType.BYTE]!! + 1).toByte()
         }
 
-        val threshold = COLLECTION_MAP[entity.type]!!
+        val threshold = if (doMobPackingDespawn) {
+            DOMESTICATED_MOB_PACKING_COLLECTION[entity.type]!!
+        } else {
+            COLLECTION_MAP[entity.type]!!
+        }
+
         val gc = data[GCKey, PersistentDataType.BYTE]!!
 
         if (gc > threshold) {

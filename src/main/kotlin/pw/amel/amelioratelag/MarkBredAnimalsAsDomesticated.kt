@@ -2,13 +2,14 @@ package pw.amel.amelioratelag
 
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Entity
+import org.bukkit.entity.Tameable
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityBreedEvent
 import org.bukkit.persistence.PersistentDataType
 
 object MarkBredAnimalsAsDomesticated: Listener {
-    val DomesticatedKey = NamespacedKey(AmeliorateLag.instance, "domesticated")
+    val DomesticatedKey = NamespacedKey(AmeliorateLag.instance, "Domesticated")
 
     @EventHandler(ignoreCancelled = true)
     fun onEntityBreed(event: EntityBreedEvent) {
@@ -23,7 +24,7 @@ object MarkBredAnimalsAsDomesticated: Listener {
     }
 
     fun Entity.isDomesticated(): Boolean {
-        return persistentDataContainer.has(DomesticatedKey, PersistentDataType.BYTE)
+        return (this is Tameable && isTamed) || persistentDataContainer.has(DomesticatedKey, PersistentDataType.BYTE)
     }
 }
 

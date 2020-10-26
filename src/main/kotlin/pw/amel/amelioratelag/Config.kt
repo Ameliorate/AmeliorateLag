@@ -6,7 +6,7 @@ import org.bukkit.entity.EntityType.*
 /**
  * The number of ticks between garbage collection cycles
  */
-const val GARBAGE_COLLECTION_INTERVAL: Long = 5  * 60 * 20 // 5 minutes, in ticks
+const val GARBAGE_COLLECTION_INTERVAL_TICKS: Long = 5  * 60 * 20 // 5 minutes, in ticks
 
 /**
  * The distance to a player an entity has to be for it to not ever be despawned
@@ -14,9 +14,20 @@ const val GARBAGE_COLLECTION_INTERVAL: Long = 5  * 60 * 20 // 5 minutes, in tick
 const val PLAYER_SCAN_DISTANCE: Double = 10.0
 
 /**
+ * The radius of the area the plugin will search around a domesticated animal for other mobs and slowly despawn them
+ * if the packing exceeds DOMESTICATED_MOB_PACKING_THRESHOLD.
+ */
+const val DOMESTICATED_MOB_PACKING_SCAN_RADIUS: Double = 16.0
+
+/**
+ * The number of mobs around the domesticated animal that will increment its GC count.
+ */
+const val DOMESTICATED_MOB_PACKING_THRESHOLD: Int = 16
+
+/**
  * Worlds that are not garbage collected
  */
-val EXCLUDED_WORLDS = arrayOf( "disabled_world" )
+val EXCLUDED_WORLDS = arrayOf("disabled_world", "another_disabled_world")
 
 /**
  * Entities that should never be garbage collected
@@ -153,13 +164,41 @@ fun initCollectionMap() {
     // what is unknown though
     COLLECTION_MAP[UNKNOWN] = 5
 
+    // From here on, check the config and make sure nothing is missing.
+    // If you're updating to future versions, this part will complain about missing entries
+
     for (entity in EXCLUDED_ENTITIES) {
         COLLECTION_MAP[entity] = -1
     }
 
     for (type in EntityType.values()) {
         if (type !in COLLECTION_MAP) {
-            AmeliorateLag.instance.logger.warning("${type} of mob exists but is not mentioned in config")
+            AmeliorateLag.instance.logger.warning("${type} mob exists but is not mentioned in config")
         }
     }
+}
+
+val DOMESTICATED_MOB_PACKING_COLLECTION = mutableMapOf<EntityType, Int>()
+
+fun initDomesticatedMobPackingCollection() {
+    // Domesticated animals must go over their threshold for 4.16 hours to be despawned.
+
+    DOMESTICATED_MOB_PACKING_COLLECTION[DONKEY] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[HORSE] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[SHEEP] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[COW] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[MUSHROOM_COW] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[PIG] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[CHICKEN] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[WOLF] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[CAT] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[OCELOT] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[RABBIT] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[LLAMA] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[TURTLE] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[PANDA] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[FOX] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[BEE] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[HOGLIN] = 50
+    DOMESTICATED_MOB_PACKING_COLLECTION[STRIDER] = 50
 }
