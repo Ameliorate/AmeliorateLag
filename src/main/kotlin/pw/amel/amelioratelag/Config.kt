@@ -46,13 +46,17 @@ val EXCLUDED_ENTITIES = arrayOf(ARMOR_STAND,
         VILLAGER,
         WITHER)
 
+/**
+ * Indicates the entities maximum GC count that will cause them to despawn.
+ *
+ * To find when an entity will despawn, multiply the maximum GC count with the GARBAGE_COLLECTION_INTERVAL.
+ */
 val COLLECTION_MAP = mutableMapOf<EntityType, Int>()
 
+/**
+ * Sets the values of COLLECTION_MAP.
+ */
 fun initCollectionMap() {
-    for (entity in EXCLUDED_ENTITIES) {
-        COLLECTION_MAP[entity] = -1
-    }
-
     // Item-type entities
     // also projectiles
     // I recommend 2 for each of these, because they normally naturally despawn / are used up and 2 makes sure they
@@ -148,6 +152,10 @@ fun initCollectionMap() {
 
     // what is unknown though
     COLLECTION_MAP[UNKNOWN] = 5
+
+    for (entity in EXCLUDED_ENTITIES) {
+        COLLECTION_MAP[entity] = -1
+    }
 
     for (type in EntityType.values()) {
         if (type !in COLLECTION_MAP) {

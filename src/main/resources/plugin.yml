@@ -3,5 +3,3 @@ version: ${version}
 main: ${groupId}.${name}
 author: Amelorate
 softdepend: []
-
-permissions:
