@@ -41,8 +41,9 @@ object MarkBredAnimalsAsDomesticated: Listener {
         data[DomesticatedKey, PersistentDataType.BYTE] = 1
     }
 
-    fun Entity.isDomesticated(): Boolean {
-        return (this is Tameable && isTamed) || persistentDataContainer.has(DomesticatedKey, PersistentDataType.BYTE)
-    }
+    val Entity.isDomesticated: Boolean
+        get() {
+            return (this is Tameable && isTamed) || persistentDataContainer.has(DomesticatedKey, PersistentDataType.BYTE)
+        }
 }
 

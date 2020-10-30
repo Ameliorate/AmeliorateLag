@@ -63,7 +63,7 @@ object GarbageCollector: BukkitRunnable() {
 
         var doMobPackingDespawn = false
 
-        if (entity.isDomesticated()) {
+        if (entity.isDomesticated) {
             if (entity.getNearbyEntities(DOMESTICATED_MOB_PACKING_SCAN_RADIUS,
                             DOMESTICATED_MOB_PACKING_SCAN_RADIUS,
                             DOMESTICATED_MOB_PACKING_SCAN_RADIUS).size > DOMESTICATED_MOB_PACKING_THRESHOLD) {
