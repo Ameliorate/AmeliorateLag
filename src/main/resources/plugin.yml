@@ -3,3 +3,4 @@ version: ${version}
 main: ${groupId}.${name}
 author: Amelorate
 softdepend: []
+api-version: 1.13
