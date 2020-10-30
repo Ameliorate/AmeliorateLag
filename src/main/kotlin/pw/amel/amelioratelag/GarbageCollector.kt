@@ -25,7 +25,6 @@ import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 import pw.amel.amelioratelag.GarbageCollector.ProcessingResult.*
 import pw.amel.amelioratelag.MarkBredAnimalsAsDomesticated.isDomesticated
-import pw.amel.amelioratelag.MarkEggNamedMobs.isEggSpawned
 
 object GarbageCollector: BukkitRunnable() {
     val GCKey = NamespacedKey(AmeliorateLag.instance, "GCKey")
@@ -56,8 +55,7 @@ object GarbageCollector: BukkitRunnable() {
      * @param entity The entity to be evaluated.
      */
     fun processEntity(entity: Entity): ProcessingResult {
-        val data = entity.persistentDataContainer
-        if (entity.customName != null && !entity.isEggSpawned) {
+        if (entity.customName != null) {
             return NEVER_DESPAWN
         }
 
@@ -84,6 +82,7 @@ object GarbageCollector: BukkitRunnable() {
             }
         }
 
+        val data = entity.persistentDataContainer
         if (!data.has(GCKey, PersistentDataType.BYTE)) {
             data[GCKey, PersistentDataType.BYTE] = 0
         } else {
