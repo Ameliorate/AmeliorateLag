@@ -19,6 +19,7 @@
 package pw.amel.amelioratelag
 
 import org.bukkit.plugin.java.JavaPlugin
+import pw.amel.amelioratelag.tracking.MarkBredAnimalsAsDomesticated
 
 class AmeliorateLag: JavaPlugin() {
 	companion object {

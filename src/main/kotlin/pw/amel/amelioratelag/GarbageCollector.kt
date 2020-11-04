@@ -24,7 +24,7 @@ import org.bukkit.entity.Player
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 import pw.amel.amelioratelag.GarbageCollector.ProcessingResult.*
-import pw.amel.amelioratelag.MarkBredAnimalsAsDomesticated.isDomesticated
+import pw.amel.amelioratelag.tracking.MarkBredAnimalsAsDomesticated.isDomesticated
 
 object GarbageCollector: BukkitRunnable() {
     val GCKey = NamespacedKey(AmeliorateLag.instance, "GCKey")

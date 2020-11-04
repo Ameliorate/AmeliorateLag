@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package pw.amel.amelioratelag
+package pw.amel.amelioratelag.tracking
 
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Entity
@@ -25,6 +25,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityBreedEvent
 import org.bukkit.persistence.PersistentDataType
+import pw.amel.amelioratelag.AmeliorateLag
 
 object MarkBredAnimalsAsDomesticated: Listener {
     val DomesticatedKey = NamespacedKey(AmeliorateLag.instance, "Domesticated")
