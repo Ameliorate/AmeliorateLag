@@ -71,17 +71,6 @@ object GarbageCollector: BukkitRunnable() {
             }
         }
 
-        for (maybePlayer in entity.getNearbyEntities(PLAYER_SCAN_DISTANCE, PLAYER_SCAN_DISTANCE, PLAYER_SCAN_DISTANCE)) {
-            if (maybePlayer is Player) {
-                return NEVER_DESPAWN
-                // Maybe a bad idea? This makes players AFK at spawners lag the server slightly, but prevents mobs
-                // the player is actively fighting from despawning.
-
-                // Should be okay with a very low value that can't be spread over a large farm, and a reasonable mob
-                // packing value
-            }
-        }
-
         val data = entity.persistentDataContainer
         if (!data.has(GCKey, PersistentDataType.BYTE)) {
             data[GCKey, PersistentDataType.BYTE] = 0
