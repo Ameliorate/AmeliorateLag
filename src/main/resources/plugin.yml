@@ -14,6 +14,10 @@ commands:
     description: Shows the chunks that have the most loaded entities
     permission: amelioratelag.datacommands
     usage: /entityheatmap [page]
+  entityplayers:
+    description: Shows a sorted list of players that have the most entities nearby
+    permission: amelioratelag.datacommands
+    usage: /entityplayers [page]
 
 permissions:
   amelioratelag.datacommands:

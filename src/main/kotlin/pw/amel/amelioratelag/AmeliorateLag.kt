@@ -20,6 +20,7 @@ package pw.amel.amelioratelag
 
 import org.bukkit.plugin.java.JavaPlugin
 import pw.amel.amelioratelag.command.ChunkLoadingHeatmap
+import pw.amel.amelioratelag.command.CountPlayerEntities
 import pw.amel.amelioratelag.command.EntityHeatmap
 import pw.amel.amelioratelag.tracking.MarkBredAnimalsAsDomesticated
 
@@ -41,6 +42,7 @@ class AmeliorateLag: JavaPlugin() {
 
 		getCommand("chunkloadheatmap")?.setExecutor(ChunkLoadingHeatmap)
 		getCommand("entityheatmap")?.setExecutor(EntityHeatmap)
+		getCommand("entityplayers")?.setExecutor(CountPlayerEntities)
 
 		GarbageCollector.runTaskTimer(this, GARBAGE_COLLECTION_INTERVAL_TICKS, GARBAGE_COLLECTION_INTERVAL_TICKS)
 		ChunkLoadingHeatmap.runTaskTimer(this, CHUNK_HEATMAP_INTERVAL_SECONDS * 20, CHUNK_HEATMAP_INTERVAL_SECONDS * 20)
