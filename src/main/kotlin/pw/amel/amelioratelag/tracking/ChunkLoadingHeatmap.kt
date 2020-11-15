@@ -82,7 +82,7 @@ object ChunkLoadingHeatmap: Listener, BukkitRunnable(), CommandExecutor {
             chunkLoadCounts[chunk] = (chunkLoadCounts[chunk] ?: 0) + 1
         }
 
-        val rankedResults: List<ChunkLocation> = chunkLoadCounts.entries.sortedBy { it.value }.filter { it.value > 1 }.map { it.key }
+        val rankedResults: List<ChunkLocation> = chunkLoadCounts.entries.sortedByDescending { it.value }.filter { it.value > 1 }.map { it.key }
         // sort the map by the value, and then get only the key into a list
 
         val numberOfPages: Int = rankedResults.size / RESULTS_PER_PAGE + 1
