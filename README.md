@@ -42,3 +42,21 @@ adjust in various spigot, bukkit, and minecraft configs to further reduce lag.
 Entity tracking over long distances has been recently optimized by mojang and may
 no longer need adjustment. However, it can be changed in `spigot.yml` under
 `entity-activation-range` and `entity-tracking-range`.
+
+# Commands
+
+All commands require op or the permission `amelioratelag.datacommands`.
+
+## /entityplayers
+
+For each player, displays a count of the entities nearest to that player.
+
+## /entityheatmap
+
+Gets a list of the chunks sorted by the number of entities in that chunk.
+Coordinates displayed are block coordinates.
+
+## /chunkloadheatmap
+
+Gets a list of the chunks sorted by the number of times they have been loaded in the last 5 (configurable) minutes.
+Coordinates displayed are block coordinates.
