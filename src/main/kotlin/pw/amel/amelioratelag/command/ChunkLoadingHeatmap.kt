@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package pw.amel.amelioratelag.tracking
+package pw.amel.amelioratelag.command
 
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -26,6 +26,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.world.ChunkLoadEvent
 import org.bukkit.scheduler.BukkitRunnable
 import pw.amel.amelioratelag.CHUNK_HEATMAP_INTERVAL_SECONDS
+import pw.amel.amelioratelag.COMMAND_RESULTS_PER_PAGE
 import pw.amel.amelioratelag.ChunkLocation
 import java.lang.NumberFormatException
 import java.time.Instant
@@ -56,8 +57,6 @@ object ChunkLoadingHeatmap: Listener, BukkitRunnable(), CommandExecutor {
         }
     }
 
-    const val RESULTS_PER_PAGE = 10
-
     override fun onCommand(sender: CommandSender, command: Command, commandName: String, args: Array<out String>): Boolean {
         val page = args.getOrNull(0) ?: "1"
         val programmerPage = try {
@@ -65,8 +64,8 @@ object ChunkLoadingHeatmap: Listener, BukkitRunnable(), CommandExecutor {
         } catch (e: NumberFormatException) {
             return false
         }
-        val start = programmerPage * RESULTS_PER_PAGE
-        val end = start + RESULTS_PER_PAGE - 1
+        val start = programmerPage * COMMAND_RESULTS_PER_PAGE
+        val end = start + COMMAND_RESULTS_PER_PAGE - 1
 
         garbageCollectChunkLoadTimes()
 
@@ -77,9 +76,9 @@ object ChunkLoadingHeatmap: Listener, BukkitRunnable(), CommandExecutor {
         }
 
         val rankedResults: List<ChunkLocation> = chunkLoadCounts.entries.sortedByDescending { it.value }.filter { it.value > 1 }.map { it.key }
-        // sort the map by the value, and then get only the key into a list
+        // sort the map by the value, find chunks that have been loaded more than once, and then get only the key into a list
 
-        val numberOfPages: Int = rankedResults.size / RESULTS_PER_PAGE + 1
+        val numberOfPages: Int = rankedResults.size / COMMAND_RESULTS_PER_PAGE + 1
 
         sender.sendMessage("~-~ Chunkloading Hotspots Page [$page/$numberOfPages] ~-~")
         for (i in start..end) {

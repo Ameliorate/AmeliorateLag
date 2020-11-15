@@ -22,6 +22,11 @@ import org.bukkit.entity.EntityType
 import org.bukkit.entity.EntityType.*
 
 /**
+ * The number of individual results per page. Used in the commands of AmeliorateLag.
+ */
+const val COMMAND_RESULTS_PER_PAGE: Int = 10
+
+/**
  * The amount of time the chunk heatmap should cover
  */
 const val CHUNK_HEATMAP_INTERVAL_SECONDS: Long = 5 * 60 // 5 minutes in seconds
