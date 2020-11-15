@@ -4,3 +4,14 @@ main: ${groupId}.${name}
 author: Amelorate
 softdepend: []
 api-version: 1.13
+
+commands:
+  chunkloadheatmap:
+    description: Gets the most loaded chunks in the last 5 minutes.
+    permission: amelioratelag.datacommands
+    usage: /chunkloadheatmap [page]
+
+permissions:
+  amelioratelag.datacommands:
+    description: Allows using AmeliorateLag commands to get info about laggy chunks, entities, etc.
+    default: op

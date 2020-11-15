@@ -22,6 +22,11 @@ import org.bukkit.entity.EntityType
 import org.bukkit.entity.EntityType.*
 
 /**
+ * The amount of time the chunk heatmap should cover
+ */
+const val CHUNK_HEATMAP_INTERVAL_SECONDS: Long = 5 * 60 // 5 minutes in seconds
+
+/**
  * The number of ticks between garbage collection cycles
  */
 const val GARBAGE_COLLECTION_INTERVAL_TICKS: Long = 5  * 60 * 20 // 5 minutes, in ticks

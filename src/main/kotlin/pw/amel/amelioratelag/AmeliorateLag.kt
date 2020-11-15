@@ -19,6 +19,7 @@
 package pw.amel.amelioratelag
 
 import org.bukkit.plugin.java.JavaPlugin
+import pw.amel.amelioratelag.tracking.ChunkLoadingHeatmap
 import pw.amel.amelioratelag.tracking.MarkBredAnimalsAsDomesticated
 
 class AmeliorateLag: JavaPlugin() {
@@ -35,7 +36,11 @@ class AmeliorateLag: JavaPlugin() {
 		initDomesticatedMobPackingCollection()
 
 		server.pluginManager.registerEvents(MarkBredAnimalsAsDomesticated, this)
+		server.pluginManager.registerEvents(ChunkLoadingHeatmap, this)
+
+		getCommand("chunkloadheatmap")?.setExecutor(ChunkLoadingHeatmap)
 
 		GarbageCollector.runTaskTimer(this, GARBAGE_COLLECTION_INTERVAL_TICKS, GARBAGE_COLLECTION_INTERVAL_TICKS)
+		ChunkLoadingHeatmap.runTaskTimer(this, CHUNK_HEATMAP_INTERVAL_SECONDS * 20, CHUNK_HEATMAP_INTERVAL_SECONDS * 20)
 	}
 }
