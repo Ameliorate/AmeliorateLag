@@ -18,8 +18,6 @@
 
 package pw.amel.amelioratelag.tracking
 
-import org.bukkit.ChatColor
-import org.bukkit.World
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -28,15 +26,11 @@ import org.bukkit.event.Listener
 import org.bukkit.event.world.ChunkLoadEvent
 import org.bukkit.scheduler.BukkitRunnable
 import pw.amel.amelioratelag.CHUNK_HEATMAP_INTERVAL_SECONDS
+import pw.amel.amelioratelag.ChunkLocation
 import java.lang.NumberFormatException
 import java.time.Instant
 
 object ChunkLoadingHeatmap: Listener, BukkitRunnable(), CommandExecutor {
-    data class ChunkLocation(val x: Int, val z: Int, val world: World) {
-        override fun toString(): String {
-            return "${ChatColor.AQUA}[${x * 16} ${z * 16} ${world.name}]${ChatColor.RESET}"
-        }
-    }
 
     val chunkLoadTimes = mutableMapOf<Instant, ChunkLocation>()
 
