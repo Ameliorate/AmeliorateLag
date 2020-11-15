@@ -35,7 +35,15 @@ object GarbageCollector: BukkitRunnable() {
                 continue
             }
 
-            for (entity in world.entities) {
+            for ((chunkCount, entities: List<Entity>) in world.entities.chunked(GARBAGE_COLLECTION_CHUNKING_COUNT).withIndex()) {
+                AmeliorateLag.instance.server.scheduler.runTaskLater(AmeliorateLag.instance, entityBatch(entities), chunkCount.toLong())
+            }
+        }
+    }
+
+    fun entityBatch(entities: List<Entity>): () -> Unit {
+        return {
+            for (entity in entities) {
                 if (entity.type in EXCLUDED_ENTITIES) {
                     continue
                 }

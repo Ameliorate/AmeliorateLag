@@ -37,9 +37,11 @@ const val CHUNK_HEATMAP_INTERVAL_SECONDS: Long = 5 * 60 // 5 minutes in seconds
 const val GARBAGE_COLLECTION_INTERVAL_TICKS: Long = 5  * 60 * 20 // 5 minutes, in ticks
 
 /**
- * The distance to a player an entity has to be for it to not ever be despawned
+ * The number of entities that will be garbage collected in a single tick.
+ *
+ * If there are more entities than this number, garbage collection will be split over multiple ticks.
  */
-const val PLAYER_SCAN_DISTANCE: Double = 10.0
+const val GARBAGE_COLLECTION_CHUNKING_COUNT: Int = 1000
 
 /**
  * The radius of the area the plugin will search around a domesticated animal for other mobs and slowly despawn them
